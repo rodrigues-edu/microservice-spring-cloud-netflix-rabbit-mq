@@ -9,29 +9,26 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 import lombok.AllArgsConstructor;
+import lombok.Data;
 import lombok.EqualsAndHashCode;
-import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
 
-@JsonPropertyOrder({"id", "nome", "estoque", "preco"})
-@Getter
-@Setter
-@ToString
-@AllArgsConstructor
+@JsonPropertyOrder({"id","nome","estoque","preco"})
+@Data
 @NoArgsConstructor
-@EqualsAndHashCode
+@AllArgsConstructor
+@EqualsAndHashCode//(callSuper = false)
 public class ProdutoVO implements Serializable {
-	private static final long serialVersionUID = 1L;
+
+	private static final long serialVersionUID = 2938272643682548375L;
 
 	@JsonProperty("id")
 	private Long id;
+
+	@JsonProperty("nome")
+	private String nome;
 	
-	@JsonProperty("name")
-	private String name;
-	
-	@JsonProperty("name")
+	@JsonProperty("estoque")
 	private Integer estoque;
 	
 	@JsonProperty("preco")
@@ -41,4 +38,13 @@ public class ProdutoVO implements Serializable {
 		return new ModelMapper().map(produto, ProdutoVO.class);
 	}
 
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+	
+	
 }
