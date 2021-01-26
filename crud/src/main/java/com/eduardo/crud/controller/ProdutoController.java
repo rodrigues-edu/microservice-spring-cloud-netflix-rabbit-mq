@@ -66,20 +66,20 @@ public class ProdutoController {
 		return new ResponseEntity<>(pagedModel,HttpStatus.OK);
 	}
 	
-	@PostMapping(produces = {"application/json","application/xml","application/x-yaml"},
-			consumes = {"application/json","application/xml","application/x-yaml"})
+	@PostMapping(produces = {"application/json","application/xml","application/x-yaml"}, 
+		     consumes = {"application/json","application/xml","application/x-yaml"})
 	public ProdutoVO create(@RequestBody ProdutoVO produtoVO) {
-		ProdutoVO proVO = produtoService.create(produtoVO);
-		proVO.add(linkTo(methodOn(ProdutoController.class).findById(produtoVO.getId())).withSelfRel());
-		return proVO;
+		ProdutoVO proVo = produtoService.create(produtoVO);
+		proVo.add(linkTo(methodOn(ProdutoController.class).findById(proVo.getId())).withSelfRel());
+		return proVo;
 	}
-	
-	@PutMapping(produces = {"application/json","application/xml","application/x-yaml"},
-			consumes = {"application/json","application/xml","application/x-yaml"})
+
+	@PutMapping(produces = {"application/json","application/xml","application/x-yaml"}, 
+		     consumes = {"application/json","application/xml","application/x-yaml"})
 	public ProdutoVO update(@RequestBody ProdutoVO produtoVO) {
-		ProdutoVO proVO = produtoService.update(produtoVO);
-		proVO.add(linkTo(methodOn(ProdutoController.class).findById(produtoVO.getId())).withSelfRel());
-		return proVO;
+		ProdutoVO proVo = produtoService.update(produtoVO);
+		proVo.add(linkTo(methodOn(ProdutoController.class).findById(produtoVO.getId())).withSelfRel());
+		return proVo;
 	}
 	
 	@DeleteMapping("/{id}")
