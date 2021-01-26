@@ -13,21 +13,8 @@ import org.modelmapper.ModelMapper;
 
 import com.eduardo.crud.data.vo.ProdutoVO;
 
-import lombok.AllArgsConstructor;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
-
 @Entity
 @Table(name = "produto")
-@Getter
-@Setter
-@ToString
-@AllArgsConstructor
-@NoArgsConstructor
-@EqualsAndHashCode
 public class Produto implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
