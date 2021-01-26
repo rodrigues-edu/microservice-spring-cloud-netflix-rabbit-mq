@@ -9,20 +9,23 @@ import com.eduardo.pagamento.entity.Produto;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
-@JsonPropertyOrder({"id","data","produtos","valorTotal"})
+import lombok.AllArgsConstructor;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
+
+@JsonPropertyOrder({"id","estoque"})
+@Getter
+@Setter
+@ToString
+@NoArgsConstructor
+@AllArgsConstructor
+@EqualsAndHashCode(callSuper = false)
 public class ProdutoVO extends RepresentationModel<ProdutoVO> implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
-	public ProdutoVO() {
-		
-	}
-	
-	public ProdutoVO(Long id, Integer estoque) {
-		super();
-		this.id = id;
-		this.estoque = estoque;
-	}
-
 	@JsonProperty("id")
 	private Long id;
 	
@@ -50,37 +53,4 @@ public class ProdutoVO extends RepresentationModel<ProdutoVO> implements Seriali
 	public static ProdutoVO create(Produto produto) {
 		return new ModelMapper().map(produto, ProdutoVO.class);
 	}
-	
-
-	@Override
-	public String toString() {
-		return "ProdutoVO [id=" + id + ", estoque=" + estoque + "]";
-	}
-
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = super.hashCode();
-		result = prime * result + ((id == null) ? 0 : id.hashCode());
-		return result;
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (!super.equals(obj))
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		ProdutoVO other = (ProdutoVO) obj;
-		if (id == null) {
-			if (other.id != null)
-				return false;
-		} else if (!id.equals(other.id))
-			return false;
-		return true;
-	}
-	
-
 }

@@ -12,6 +12,10 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import org.modelmapper.ModelMapper;
+
+import com.eduardo.pagamento.entity.data.vo.ProdutoVendaVO;
+
 @Entity
 @Table(name = "produto_venda")
 public class ProdutoVenda implements Serializable {
@@ -40,8 +44,12 @@ public class ProdutoVenda implements Serializable {
 	private Integer quantidade;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "id)_venda")
+	@JoinColumn(name = "id_venda")
 	private Venda venda;
+	
+	public static ProdutoVenda create(ProdutoVendaVO produtoVendaVO) {
+		return new ModelMapper().map(produtoVendaVO, ProdutoVenda.class);
+	}	
 
 	public Long getId() {
 		return id;
@@ -74,7 +82,6 @@ public class ProdutoVenda implements Serializable {
 	public void setVenda(Venda venda) {
 		this.venda = venda;
 	}
-	
 
 	@Override
 	public String toString() {

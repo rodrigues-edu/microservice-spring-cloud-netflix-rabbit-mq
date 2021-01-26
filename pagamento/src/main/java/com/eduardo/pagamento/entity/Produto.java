@@ -5,8 +5,12 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import org.modelmapper.ModelMapper;
+
+import com.eduardo.pagamento.entity.data.vo.ProdutoVO;
+
 @Entity
-@Table(name = "venda")
+@Table(name = "produto")
 public class Produto {
 	
 	public Produto() {
@@ -24,23 +28,10 @@ public class Produto {
 	
 	@Column(name = "estoque", nullable = false, length = 10)
 	private Integer estoque;
-
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
-
-	public Integer getEstoque() {
-		return estoque;
-	}
-
-	public void setEstoque(Integer estoque) {
-		this.estoque = estoque;
-	}
 	
+	public static Produto create(ProdutoVO produtoVO) {
+		return new ModelMapper().map(produtoVO, Produto.class);
+	}
 
 	@Override
 	public String toString() {

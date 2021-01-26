@@ -14,10 +14,13 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import org.modelmapper.ModelMapper;
 import org.springframework.format.annotation.DateTimeFormat;
 
+import com.eduardo.pagamento.entity.data.vo.VendaVO;
+
 @Entity
-@Table
+@Table(name = "venda")
 public class Venda implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
@@ -37,15 +40,20 @@ public class Venda implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	@DateTimeFormat(pattern = "MM/dd/yyyy")	
+	@DateTimeFormat(pattern = "MM/dd/yyyy")
 	@Column(name = "data", nullable = false)
 	private Date data;
 	
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "venda", cascade = CascadeType.REFRESH)
 	private List<ProdutoVenda> produtos;
 	
-	@Column(name = "valor_total", nullable = false)
+	@Column(name = "valorTotal", nullable = false, length = 10)
 	private Double valorTotal;
+	
+	public static Venda create(VendaVO  vendaVO) {
+		return new ModelMapper().map(vendaVO, Venda.class);
+	}
+	
 
 	public Long getId() {
 		return id;
